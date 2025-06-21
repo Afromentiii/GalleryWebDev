@@ -1,0 +1,23 @@
+//- Import CSS Bootstrapa (w szablonie layoutu lub w head)
+link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css')
+
+//- Galerie innych użytkowników
+h2.mb-4 Galerie innych użytkowników
+
+if otherGalleries && otherGalleries.length > 0
+  each gallery in otherGalleries
+    div.card.mb-4.border-dashed
+      div.card-body
+        h3.card-title #{gallery.name}
+
+        if gallery.images && gallery.images.length > 0
+          ul.list-unstyled.d-flex.flex-wrap.gap-3.mt-3
+            each img in gallery.images
+              li.card(style='width: 180px;')
+                img.card-img-top(src=img.path, alt=img.name, style='height: 150px; object-fit: cover;')
+                div.card-body.p-2
+                  p.card-text.fw-bold.mb-0.text-truncate #{img.name}
+        else
+          p.text-muted Brak obrazków
+else
+  p.text-muted Brak galerii innych użytkowników.

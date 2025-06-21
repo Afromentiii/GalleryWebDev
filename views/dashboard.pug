@@ -12,37 +12,15 @@ block content
 
     hr
 
-    h2 Dodaj nową galerię
-    form(action='/dashboard/gallery/add', method='POST')
-      label(for='galleryName') Nazwa galerii:
-      input(type='text', name='galleryName', id='galleryName', required)
-      br
-      button(type='submit') Dodaj galerię
+    include add-gallery.pug
 
     hr
 
-    if galleries && galleries.length > 0
-      h2 Twoje galerie
-      each gallery in galleries
-        div(style='border:1px solid #ccc; margin-bottom:20px; padding:10px')
-          h3 #{gallery.name}
-          form(action=`/dashboard/gallery/delete/${gallery.id}`, method='POST', style='display:inline')
-            button(type='submit', onclick="return confirm('Na pewno chcesz usunąć tę galerię?')") Usuń galerię
+    include user-galleries.pug
 
-          //- Dodawanie obrazka do galerii
-          form(action=`/dashboard/gallery/${gallery.id}/add-image`, method='POST', enctype='multipart/form-data', style='margin-top:10px')
-            label(for=`image_${gallery.id}`) Dodaj obrazek do galerii:
-            input(type='file', name='image', id=`image_${gallery.id}`, accept='image/*', required)
-            button(type='submit') Dodaj obrazek
+    hr
 
-          //- Wyświetlanie obrazków galerii (jeśli masz takie dane)
-          if gallery.images && gallery.images.length > 0
-            ul(style='margin-top:10px')
-              each img in gallery.images
-                li
-                  img(src=img.url, alt=img.name, style='max-width:150px; max-height:150px; display:block;')
-    else
-      p Nie masz jeszcze żadnych galerii.
+    include other-galleries.pug
 
   else
     p Nie jesteś zalogowany.

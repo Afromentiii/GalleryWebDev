@@ -52,7 +52,7 @@ router.post('/', async (req, res) => {
       });
     }
 
-    const payload = { username: user.username, role: user.role };
+    const payload = { username: user.username, role: user.role, id: user._id  };
     const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
 
     res.cookie('token', token, {
