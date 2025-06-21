@@ -149,8 +149,6 @@ router.post('/image/edit/:id', authenticateJWT, async (req, res) => {
 
 
 
-
-
 // Wylogowanie
 router.post('/logout', (req, res) => {
   res.clearCookie('token');
