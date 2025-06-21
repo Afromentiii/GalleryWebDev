@@ -13,6 +13,8 @@ var imagesRouter = require('./routes/images');
 var statsRouter = require('./routes/stats');
 var loginRouter =  require('./routes/login');
 var registerRouter = require('./routes/register');
+var dashboardRouter = require('./routes/dashboard');
+
 var app = express();
 
 app.set('views', path.join(__dirname, 'views'));
@@ -24,6 +26,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -32,9 +38,15 @@ app.use('/images', imagesRouter);
 app.use('/stats', statsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter)
+app.use('/dashboard', dashboardRouter)
 
 app.use(express.static('public'));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
 app.use(function(req, res, next) {
   next(createError(404));
 });

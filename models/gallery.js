@@ -5,9 +5,17 @@ const Schema = mongoose.Schema;
 const GallerySchema = new Schema({
   name: { type: String, maxLength: 100, required: true },
   description: { type: String, maxLength: 200 },
-  date: { type: Date, default: Date.now() },
-  user: { type: Schema.Types.ObjectId, ref: "User", required: true }
+  date: { type: Date, default: Date.now },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  images: [
+    {
+      url: { type: String, required: true },
+      filename: { type: String, required: true },
+      uploadedAt: { type: Date, default: Date.now }
+    }
+  ]
 }, { collection: 'galleries' });
+
 
 // Export model
 module.exports = mongoose.model("Gallery", GallerySchema);
