@@ -35,7 +35,7 @@
                 each img in gallery.images
                   .col
                     .card.h-100(style='min-height: 300px')
-                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name)
+                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name, onclick=`showImageModal('${img.path}', '${(img.description || 'Brak opisu').replace(/'/g, "\\'")}')`)
                       .card-body
                         h6.card-title.mb-1.text-ellipsis(title=img.name) #{img.name}
 

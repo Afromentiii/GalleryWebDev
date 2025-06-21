@@ -19,7 +19,7 @@
                 each img in gallery.images
                   .col
                     .card.h-100
-                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name)
+                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name, onclick=`showImageModal('${img.path}', '${(img.description || 'Brak opisu').replace(/'/g, "\\'")}')`)
                       .card-body.p-2
                         h6.card-title.text-truncate #{img.name}
 
@@ -48,3 +48,15 @@ script.
       block.style.display = block.style.display === 'none' ? 'block' : 'none';
     }
   }
+
+
+#imageModal.modal.fade(tabindex='-1', aria-labelledby='imageModalLabel', aria-hidden='true')
+  .modal-dialog.modal-dialog-centered.modal-xl
+    .modal-content
+      .modal-header
+        h5#imageModalLabel.modal-title
+        button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
+      .modal-body.text-center
+        img#modalImage.img-fluid.mb-3(src='', alt='')
+        hr
+        p#modalDescription.text-muted
