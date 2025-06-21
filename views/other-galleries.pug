@@ -13,7 +13,6 @@
               | #{gallery.name}
             small.text-muted.mb-3.d-block 
               i.bi.bi-person.me-1
-              | Autor: #{gallery.name}
 
             if gallery.images && gallery.images.length > 0
               .row.row-cols-2.row-cols-sm-3.row-cols-md-4.row-cols-lg-5.g-2.mt-3
@@ -23,7 +22,16 @@
                       img.card-img-top.image-thumbnail(src=img.path, alt=img.name)
                       .card-body.p-2
                         h6.card-title.text-truncate #{img.name}
-                        p.card-text.small.text-muted #{img.description || 'Brak opisu'}
+
+                        button.btn.btn-sm.btn-link.p-0.mb-2(type='button', onclick=`toggleDescription('${img._id}')`)
+                          i.bi.bi-eye.me-1
+                          | Pokaż/Ukryj opis
+
+                        .image-description(style='display: none;', id=`descBlock_${img._id}`)
+                          small.text-muted
+                            | Nazwa: #{img.name}
+                            br
+                            | Opis: #{img.description || 'Brak opisu'}
             else
               .alert.alert-info.mt-3
                 i.bi.bi-info-circle.me-2
@@ -32,3 +40,11 @@
       .alert.alert-warning
         i.bi.bi-exclamation-triangle.me-2
         | Brak galerii innych użytkowników.
+
+script.
+  function toggleDescription(id) {
+    const block = document.getElementById('descBlock_' + id);
+    if (block) {
+      block.style.display = block.style.display === 'none' ? 'block' : 'none';
+    }
+  }

@@ -10,5 +10,104 @@
 
 .card.h-100:hover {
   transform: translateY(-4px);
-  box-shadow: 0 6px 18px rgb(0 0 0 / 0.12);
+  box-shadow: 0 6px 18px rgba(128, 125, 125, 0.12);
 }
+
+p.card-text.small.text-muted,
+small.text-muted {
+  font-size: 0.8rem;
+  color: #777;
+  font-style: italic;
+  min-height: 1.1rem;
+}
+
+.alert-info {
+  background-color: #e7f3fe;
+  color: #3178c6;
+  border: 1px solid #bee1fd;
+}
+
+.alert-warning {
+  background-color: #fff4e5;
+  color: #a86a00;
+  border: 1px solid #f0c36d;
+}
+
+form.mb-4 .form-label {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+form.mb-4 input.form-control,
+form.mb-4 textarea.form-control {
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  transition: border-color 0.3s ease;
+}
+
+form.mb-4 input.form-control:focus,
+form.mb-4 textarea.form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 5px rgb(13 110 253 / 0.5);
+  outline: none;
+}
+
+img.card-img-top.image-thumbnail {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  object-fit: cover;
+  height: 100px;
+  width: 100%;
+  display: block;
+}
+
+.card.h-100 {
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  box-shadow: 0 1px 5px rgb(0 0 0 / 0.05);
+  background-color: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.card.shadow-sm.mb-4 {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+  background-color: #fff;
+  transition: box-shadow 0.3s ease;
+}
+
+.card.shadow-sm.mb-4:hover {
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+/* Body karty */
+.card-body {
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+}
+
+/* Nagłówki kart */
+.card-title {
+  font-weight: 600;
+  color: #222;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+/* Karty galerii z obramowaniem przerywanym */
+.gallery-card.border-dashed {
+  border: 2px dashed #a0a0a0;
+  border-radius: 10px;
+  background-color: #fafafa;
+  transition: background-color 0.3s ease;
+}
+
+.gallery-card.border-dashed:hover {
+  background-color: #f0f0f0;
+}
+
