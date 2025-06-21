@@ -1,0 +1,40 @@
+doctype html
+html(lang="pl")
+  head
+    title Logowanie | System
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet", href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css")
+    link(rel="stylesheet", href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css")
+    link(rel="stylesheet", href="/stylesheets/login.css")
+
+  body
+    .auth-card
+      .auth-header
+        i.fas.fa-user-lock.fa-2x.mb-2
+        h2.auth-title System Logowania
+        p.text-muted Wprowadź dane logowania
+
+      form(action="/login" method="POST")
+        .mb-3
+          label(for="login" class="form-label") Login:
+          .input-group
+            span.input-group-text
+              i.fas.fa-user
+            input(type="text" name="login" id="login" required class="form-control" placeholder="Nazwa użytkownika")
+
+        .mb-3
+          label(for="password" class="form-label") Hasło:
+          .input-group
+            span.input-group-text
+              i.fas.fa-lock
+            input(type="password" name="password" required class="form-control" placeholder="••••••••")
+
+        button(type="submit" class="btn btn-auth w-100 mt-2")
+          i.fas.fa-sign-in-alt.me-2
+          | Zaloguj się
+
+      .auth-footer
+        | Nie masz konta?
+        a(href="/register" class="text-decoration-none ms-1") Zarejestruj się:
+
