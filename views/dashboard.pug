@@ -1,29 +1,35 @@
 extends layout
 
 block content
-  h1 Dashboard
+  .container.mt-4
+    .row.justify-content-center
+      .col-lg-10
+        .card.shadow-sm.mb-4
+          .card-body.text-center
+            h1.card-title Dashboard
+            if user
+              .alert.alert-success.mt-3
+                h4.alert-heading Witaj, #{user.username}!
+                p Twoja rola: 
+                  span.badge.bg-primary #{user.role}
+              form(action='/dashboard/logout', method='POST')
+                button.btn.btn-outline-danger(type='submit') 
+                  i.bi.bi-box-arrow-right.me-2
+                  | Wyloguj się
+            else
+              .alert.alert-warning
+                p Nie jesteś zalogowany.
+                .d-flex.gap-2.justify-content-center
+                  a.btn.btn-primary(href='/login') Zaloguj się
+                  a.btn.btn-success(href='/register') Zarejestruj się
 
-  if user
-    p Witaj, użytkowniku o nazwie #{user.username}!
-    p Twoja rola: #{user.role}
+        if user
+          include add-gallery.pug
+          include user-galleries.pug
+          include other-galleries.pug 
 
-    form(action='/dashboard/logout', method='POST')
-      button(type='submit') Wyloguj się
-
-    hr
-
-    include add-gallery.pug
-
-    hr
-
-    include user-galleries.pug
-
-    hr
-
-    include other-galleries.pug
-
-  else
-    p Nie jesteś zalogowany.
-    a(href='/login') Zaloguj się
-    br
-    a(href='/register') Zarejestruj się
+          if user.role === 'admin'
+            .card.shadow-sm.mb-4
+              .card-body
+                h2 Admin Panel
+                p To jest panel dostępny tylko dla administratora.

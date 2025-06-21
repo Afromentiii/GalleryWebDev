@@ -1,57 +1,83 @@
-if galleries && galleries.length > 0
-  h2 Twoje galerie
-  each gallery in galleries
-    div(style='border:1px solid #ccc; margin-bottom:20px; padding:10px')
-      h3 #{gallery.name}
+.card.shadow-sm.mb-4
+  .card-body
+    h2.card-title.mb-4 
+      i.bi.bi-collection.me-2
+      | Twoje galerie
 
-      form(action=`/dashboard/gallery/delete/${gallery._id}`, method='POST', style='display:inline')
-        button(type='submit', onclick="return confirm('Na pewno chcesz usunąć tę galerię?')") Usuń galerię
+    if galleries && galleries.length > 0
+      each gallery in galleries
+        .card.mb-4.gallery-card
+          .card-body
+            .d-flex.justify-content-between.align-items-center.mb-3
+              h3.card-title.mb-0
+                i.bi.bi-folder2-open.me-2
+                | #{gallery.name}
+              form(action=`/dashboard/gallery/delete/${gallery._id}`, method='POST')
+                button.btn.btn-sm.btn-outline-danger(type='submit', onclick="return confirm('Na pewno chcesz usunąć tę galerię?')")
+                  i.bi.bi-trash.me-1
+                  | Usuń
 
-      form(action=`/dashboard/gallery/${gallery._id}/add-image`, method='POST', enctype='multipart/form-data')
-        label(for=`image_${gallery._id}`) Dodaj obrazek do galerii:
-        input(type='file', name='image', id=`image_${gallery._id}`, accept='image/*', required)
-        button(type='submit') Dodaj obrazek
+            form(action=`/dashboard/gallery/${gallery._id}/add-image`, method='POST', enctype='multipart/form-data', class='mb-4')
+              .row.g-2
+                .col-md-6
+                  label.form-label(for=`image_${gallery._id}`) Dodaj obrazek
+                  input.form-control(type='file', name='image', id=`image_${gallery._id}`, accept='image/*', required)
+                .col-md-4
+                  label.form-label(for=`description_${gallery._id}`) Opis (opcjonalnie)
+                  input.form-control(type='text', name='description', id=`description_${gallery._id}`, placeholder='Opis obrazka')
+                .col-md-2.d-flex.align-items-end
+                  button.btn.btn-outline-primary.w-100(type='submit')
+                    i.bi.bi-upload.me-2
+                    | Dodaj
 
-      if gallery.images && gallery.images.length > 0
-        ul(style='margin-top:10px; display:flex; gap:10px; list-style:none; padding:0; flex-wrap: wrap;')
-          each img in gallery.images
-            li(style='position: relative; border:1px solid #ddd; padding:5px; max-width: 180px;')
-              img(src=img.path, alt=img.name, style='max-width:150px; max-height:150px; display:block; margin-bottom: 5px;')
+            if gallery.images && gallery.images.length > 0
+              .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-4.g-3.mt-2
+                each img in gallery.images
+                  .col
+                    .card.h-100
+                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name)
+                      .card-body
+                        .d-flex.justify-content-between.align-items-start
+                          div
+                            h6.card-title.mb-1 #{img.name}
+                            small.text-muted #{img.description || 'Brak opisu'}
+                          .dropdown
+                            button.btn.btn-sm.btn-outline-secondary.dropdown-toggle(type='button', data-bs-toggle='dropdown')
+                              i.bi.bi-gear
+                            ul.dropdown-menu.dropdown-menu-end
+                              li
+                                a.dropdown-item(href='#', onclick=`showEditForm('${img._id}')`)
+                                  i.bi.bi-pencil.me-2
+                                  | Edytuj
+                              li
+                                hr.dropdown-divider
+                              li
+                                form(action=`/dashboard/image/delete/${img._id}`, method='POST')
+                                  button.dropdown-item.text-danger(type='submit', onclick="return confirm('Na pewno chcesz usunąć ten obrazek?')")
+                                    i.bi.bi-trash.me-2
+                                    | Usuń
+                      form(action=`/dashboard/image/edit/${img._id}`, method='POST', style='display:none;', id=`editForm_${img._id}`, class='p-3 border-top')
+                        .mb-2
+                          label.form-label(for=`name_${img._id}`) Nazwa
+                          input.form-control(type='text', id=`name_${img._id}`, name='newName', value=img.name, required)
+                        .mb-2
+                          label.form-label(for=`desc_${img._id}`) Opis
+                          textarea.form-control(id=`desc_${img._id}`, name='newDescription') #{img.description || ''}
+                        button.btn.btn-sm.btn-success.w-100(type='submit')
+                          i.bi.bi-check-circle.me-2
+                          | Zapisz
+            else
+              .alert.alert-info
+                i.bi.bi-info-circle.me-2
+                | Ta galeria nie zawiera jeszcze żadnych obrazów.
+    else
+      .alert.alert-warning
+        i.bi.bi-exclamation-triangle.me-2
+        | Nie masz jeszcze żadnych galerii.
 
-              // Usuwanie obrazka (przycisk "X" w rogu)
-              form(action=`/dashboard/image/delete/${img._id}`, method='POST', style='position: absolute; top: 5px; right: 5px;')
-                button(type='submit', onclick="return confirm('Na pewno chcesz usunąć ten obrazek?')", style='background: rgba(255,0,0,0.7); color: white; border: none; padding: 2px 6px; cursor: pointer; font-size: 12px; border-radius: 3px;')
-                  | X
-
-              // Nazwa i opis wyświetlane na stałe
-              p(style='font-weight: bold; margin-bottom: 3px;') #{img.name}
-              p(style='font-size: 0.9em; color: #555; margin-top: 0; margin-bottom: 5px;') #{img.description || 'Brak opisu'}
-
-              // Przycisk do pokazania/ukrycia formularza edycji
-              button(type='button', class='toggle-edit-btn', style='margin-bottom: 5px; cursor: pointer;') ⚙️ Edytuj
-
-              // Formularz edycji, domyślnie ukryty
-              form(action=`/dashboard/image/edit/${img._id}`, method='POST', style='display:none;', id=`editForm_${img._id}`)
-                label(for=`name_${img._id}`) Nazwa:
-                input(type='text', id=`name_${img._id}`, name='newName', value=img.name, required)
-                button(type='submit') Zapisz
-
-else
-  p Nie masz jeszcze żadnych galerii.
-
-//- Skrypt do toggle edycji
-script.
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.toggle-edit-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const form = button.nextElementSibling;
-        if (form.style.display === 'none' || form.style.display === '') {
-          form.style.display = 'block';
-          button.textContent = '✖ Anuluj';
-        } else {
-          form.style.display = 'none';
-          button.textContent = '⚙️ Edytuj';
-        }
-      });
-    });
-  });
+block scripts
+  script.
+    function showEditForm(imgId) {
+      const form = document.getElementById(`editForm_${imgId}`);
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }

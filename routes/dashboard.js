@@ -74,7 +74,8 @@ router.post('/gallery/:id/add-image', authenticateJWT, upload.single('image'), a
     const newImage = new Image({
       name: req.file.originalname,
       path: '/images/' + req.file.filename,
-      gallery: gallery._id
+      gallery: gallery._id,
+      description: req.body.description || '' // dodane pole opisu
     });
     await newImage.save();
 
@@ -119,10 +120,11 @@ router.post('/image/delete/:id', authenticateJWT, async (req, res) => {
   }
 });
 
+// Edycja obrazka - zmiana nazwy
 router.post('/image/edit/:id', authenticateJWT, async (req, res) => {
   try {
     const imageId = req.params.id;
-    const { newName } = req.body;
+    const { newName, newDescription } = req.body;
 
     if (!newName) return res.status(400).send("Nazwa obrazka jest wymagana");
 
@@ -134,7 +136,7 @@ router.post('/image/edit/:id', authenticateJWT, async (req, res) => {
     }
 
     image.name = newName;
-    // opis pozostaje bez zmian
+    image.description = newDescription !== undefined ? newDescription : image.description;
 
     await image.save();
 
@@ -144,6 +146,8 @@ router.post('/image/edit/:id', authenticateJWT, async (req, res) => {
     res.status(500).send("Błąd serwera");
   }
 });
+
+
 
 
 

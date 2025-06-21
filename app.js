@@ -64,14 +64,16 @@ const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
 const mongoDB = "mongodb://localhost:27017/GalleryDB";
+const bcrypt = require('bcrypt');
 
 async function createAdminIfNotExists() {
   try {
     const admin = await User.findOne({ role: 'admin' });
     if (!admin) {
+      const hashedPassword = await bcrypt.hash('admin', 10); // 10 to salt rounds
       const newAdmin = new User({
         username: 'admin',
-        password: 'admin', 
+        password: hashedPassword,
         role: 'admin'
       });
       await newAdmin.save();

@@ -1,9 +1,14 @@
-link(rel='stylesheet', href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css')
-
-h2 Dodaj nową galerię
-
-form(action='/dashboard/gallery/add', method='POST')
-  label(for='galleryName') Nazwa galerii:
-  input(type='text', name='galleryName', id='galleryName', required)
-  br
-  button(type='submit') Dodaj galerię
+.card.shadow-sm.mb-4
+  .card-body
+    h2.card-title.mb-4 
+      i.bi.bi-plus-circle.me-2
+      | Dodaj nową galerię
+    form(action='/dashboard/gallery/add', method='POST')
+      .row.g-3
+        .col-md-8
+          label.form-label(for='galleryName') Nazwa galerii
+          input.form-control(type='text', name='galleryName', id='galleryName', placeholder='Wprowadź nazwę galerii', required)
+        .col-md-4.d-flex.align-items-end
+          button.btn.btn-primary.w-100(type='submit')
+            i.bi.bi-folder-plus.me-2
+            | Utwórz galerię
