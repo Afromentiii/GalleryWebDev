@@ -1,0 +1,192 @@
+[{
+  "_id": {
+    "$oid": "68572f29dd1bfd6ef58a860e"
+  },
+  "name": "domino.jpg",
+  "description": "domino.",
+  "path": "/images/1750544169547-5478627.jpg",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68572f34dd1bfd6ef58a8614"
+  },
+  "name": "ekipa.jpg",
+  "description": "ekipa.",
+  "path": "/images/1750544180335-944261964.jpg",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68572fb4dd1bfd6ef58a861a"
+  },
+  "name": "zgonn.png",
+  "description": "zgon.",
+  "path": "/images/1750544308328-346844036.png",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68572fbedd1bfd6ef58a8620"
+  },
+  "name": "demon.jpg",
+  "description": "demon",
+  "path": "/images/1750544318480-336626649.jpg",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573016dd1bfd6ef58a862c"
+  },
+  "name": "marcinek",
+  "description": "",
+  "path": "/images/1750544406719-893641819.jpg",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573048dd1bfd6ef58a8632"
+  },
+  "name": "uslugi.jpg",
+  "description": "",
+  "path": "/images/1750544456411-816523241.jpg",
+  "gallery": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685730bcdd1bfd6ef58a8646"
+  },
+  "name": "ekipa.jpg",
+  "description": "",
+  "path": "/images/1750544572969-498312985.jpg",
+  "gallery": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685730d8dd1bfd6ef58a864d"
+  },
+  "name": "mem.jpg",
+  "description": "",
+  "path": "/images/1750544600411-650077347.jpg",
+  "gallery": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573157dd1bfd6ef58a8654"
+  },
+  "name": "impreza.jpg",
+  "description": "",
+  "path": "/images/1750544727809-424051250.jpg",
+  "gallery": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573171dd1bfd6ef58a865b"
+  },
+  "name": "hawajska.jpg",
+  "description": "",
+  "path": "/images/1750544753780-491143908.jpg",
+  "gallery": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685731a1dd1bfd6ef58a8662"
+  },
+  "name": "mem.jpg",
+  "description": "",
+  "path": "/images/1750544801348-949287281.jpg",
+  "gallery": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573216dd1bfd6ef58a8678"
+  },
+  "name": "ekipa.jpg",
+  "description": "",
+  "path": "/images/1750544918663-574996247.jpg",
+  "gallery": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68573254dd1bfd6ef58a8680"
+  },
+  "name": "walka.jpg",
+  "description": "",
+  "path": "/images/1750544980075-521311986.jpg",
+  "gallery": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685732a5dd1bfd6ef58a8688"
+  },
+  "name": "szerszen.jpg",
+  "description": "",
+  "path": "/images/1750545061676-828086468.jpg",
+  "gallery": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685732d8dd1bfd6ef58a8690"
+  },
+  "name": "fuszerka.jpg",
+  "description": "",
+  "path": "/images/1750545112202-812633339.jpg",
+  "gallery": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685732f9dd1bfd6ef58a8698"
+  },
+  "name": "images.jpg",
+  "description": "",
+  "path": "/images/1750545145686-780558201.jpg",
+  "gallery": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "__v": 0
+}]

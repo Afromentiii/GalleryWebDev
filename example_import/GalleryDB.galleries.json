@@ -1,0 +1,39 @@
+[{
+  "_id": {
+    "$oid": "68572f20dd1bfd6ef58a8608"
+  },
+  "name": "Egzorcysta - Bogdan Boner",
+  "date": {
+    "$date": "2025-06-21T22:14:26.483Z"
+  },
+  "user": {
+    "$oid": "68572ec2dd1bfd6ef58a85fa"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685730b3dd1bfd6ef58a863f"
+  },
+  "name": "Kapitan Bomba",
+  "date": {
+    "$date": "2025-06-21T22:14:26.483Z"
+  },
+  "user": {
+    "$oid": "68573061dd1bfd6ef58a8639"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "685731e8dd1bfd6ef58a8670"
+  },
+  "name": "Blok ekipa",
+  "date": {
+    "$date": "2025-06-21T22:14:26.483Z"
+  },
+  "user": {
+    "$oid": "685731bbdd1bfd6ef58a8669"
+  },
+  "__v": 0
+}]
