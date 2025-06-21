@@ -1,11 +1,42 @@
 extends layout
 
 block head
-  link(rel='stylesheet', href='/stylesheets/style.css')
+  link(rel='stylesheet', href='/stylesheets/dashboard.css')
 
 block content
-  h1= title
-  p Welcome to #{title}
-  p Welcome to #{title}
-  p Welcome to #{title}
+  .container.mt-4
+    .row.justify-content-center
+      .col-lg-10
 
+        .card.shadow-sm.mb-4
+          .card-body.text-center
+            h1.card-title Dashboard
+            if user
+              .alert.alert-success.mt-3
+                h4.alert-heading Witaj, #{user.username}!
+                p Twoja rola: 
+                  span.badge.bg-primary #{user.role}
+
+              // Kontener flex dla przycisków w jednej linii
+              .d-flex.justify-content-between.align-items-center.mt-3
+                form(action='/dashboard/logout', method='POST')
+                  button.btn.btn-outline-danger(type='submit')
+                    i.bi.bi-box-arrow-right.me-2
+                    | Wyloguj się
+                
+                if user.role === 'admin'
+                  a.btn.btn-danger(href='/admin')
+                    i.bi.bi-shield-lock.me-2
+                    | Panel administratora
+
+            else
+              .alert.alert-warning
+                p Nie jesteś zalogowany.
+                .d-flex.gap-2.justify-content-center
+                  a.btn.btn-primary(href='/login') Zaloguj się
+                  a.btn.btn-success(href='/register') Zarejestruj się
+
+        if user
+          include add-gallery.pug
+          include user-galleries.pug
+          include other-galleries.pug
