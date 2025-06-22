@@ -3,6 +3,8 @@
 1. Node.js
 2. MongoDB
 3. (Opcjonalne) MongoDB Compass
+## 🟥 Ważne informacje!
+1. Aplikacja posiada wbudowane konto admin z hasłem admin.
 ## ⚙️ Instrukcja uruchomienia
 1. Uruchomić server.js znajdujący się w katalogu www za pomocą polecenia node
 ## ⚙️ Instrukcja importu (MongoDB Compass)
