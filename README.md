@@ -41,7 +41,7 @@ W projekcie zdefiniowano trzy główne modele Mongoose, które odpowiadają kole
 - Jeden **User** może mieć wiele **Gallery** (galerii).
 - Każda **Gallery** może zawierać wiele **Image** (zdjęć).
 - Każde **Image** należy do dokładnie jednej **Gallery**.
-## Endpointy panelu użytkownika
+## 🔗 Endpointy panelu użytkownika
 | Metoda | Endpoint                 | Opis                                           | Uwagi                                     |
 |--------|--------------------------|------------------------------------------------|-------------------------------------------|
 | GET    | `/`                      | Pobranie listy galerii użytkownika i innych użytkowników wraz z obrazkami | Wymaga uwierzytelnienia (authenticateJWT) |
