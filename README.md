@@ -18,7 +18,7 @@
 |--------|--------|------|
 | [bcrypt](https://www.npmjs.com/package/bcrypt) | 6.0.0 | Haszowanie haseł, bezpieczne logowanie. |
 | [bootstrap](https://www.npmjs.com/package/bootstrap) | 5.3.7 | Framework CSS/JS do stylizacji frontendowej. |
-| [cookie-parser](https://www.npmjs.com/package/cookie-parser) | ~1.4.4 | Middleware do parsowania ciasteczek. |
+| [cookie-parser](https://www.npmjs.com/package/cookie-parser) | 1.4.4 | Middleware do parsowania ciasteczek. |
 | [debug](https://www.npmjs.com/package/debug) | 2.6.9 | Narzędzie do logowania informacji debug. |
 | [express](https://www.npmjs.com/package/express) | 4.21.2 | Główny framework webowy dla Node.js. |
 | [express-async-handler](https://www.npmjs.com/package/express-async-handler) | 1.2.0 | Obsługa błędów w funkcjach async w Express. |
