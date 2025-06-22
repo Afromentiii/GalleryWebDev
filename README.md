@@ -41,4 +41,14 @@ W projekcie zdefiniowano trzy główne modele Mongoose, które odpowiadają kole
 - Jeden **User** może mieć wiele **Gallery** (galerii).
 - Każda **Gallery** może zawierać wiele **Image** (zdjęć).
 - Każde **Image** należy do dokładnie jednej **Gallery**.
+## Endpointy panelu użytkownika
+| Metoda | Endpoint                 | Opis                                           | Uwagi                                     |
+|--------|--------------------------|------------------------------------------------|-------------------------------------------|
+| GET    | `/`                      | Pobranie listy galerii użytkownika i innych użytkowników wraz z obrazkami | Wymaga uwierzytelnienia (authenticateJWT) |
+| POST   | `/gallery/add`            | Dodanie nowej galerii                           | Wymaga uwierzytelnienia                    |
+| POST   | `/gallery/:id/add-image`  | Dodanie obrazka do galerii o podanym `id`      | Wymaga uwierzytelnienia, używa multer do uploadu |
+| POST   | `/gallery/delete/:id`     | Usunięcie galerii o podanym `id` oraz powiązanych obrazków | Wymaga uwierzytelnienia                    |
+| POST   | `/image/delete/:id`       | Usunięcie pojedynczego obrazka o podanym `id`  | Wymaga uwierzytelnienia, sprawdza właściciela |
+| POST   | `/image/edit/:id`         | Edycja nazwy i opisu obrazka o podanym `id`    | Wymaga uwierzytelnienia, sprawdza właściciela |
+| POST   | `/logout`                 | Wylogowanie użytkownika (usunięcie tokenu z cookie) | Nie wymaga uwierzytelnienia                |
 
