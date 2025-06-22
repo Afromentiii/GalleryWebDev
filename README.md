@@ -30,4 +30,15 @@
 | [multer](https://www.npmjs.com/package/multer) | 2.0.1 | Obsługa przesyłania plików (upload, np. zdjęć). |
 | [pug](https://www.npmjs.com/package/pug) | 2.0.4 | Silnik szablonów HTML używany przez Express. |
 | [validator](https://www.npmjs.com/package/validator) | 13.15.15 | Walidacja i sanitizacja danych tekstowych. |
+## 📚 Modele danych
+W projekcie zdefiniowano trzy główne modele Mongoose, które odpowiadają kolekcjom w bazie MongoDB:
+| Model   | Kolekcja   | Pola główne                                               | Opis                                                                                 |
+|---------|------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **User** | `users`   | `username` (string, unikalny), `password` (string), `role` (enum: `user` lub `admin`) | Reprezentuje użytkownika aplikacji. Zawiera dane do logowania oraz rolę.             |
+| **Gallery** | `galleries` | `name` (string), `description` (string), `date` (data), `user` (referencja do User) | Reprezentuje galerię zdjęć przypisaną do konkretnego użytkownika.                    |
+| **Image** | `images`  | `name` (string), `description` (string), `path` (string), `gallery` (referencja do Gallery) | Reprezentuje pojedynczy obrazek należący do konkretnej galerii.                      |
+### ⏭ ⏮ Relacje między modelami
+- Jeden **User** może mieć wiele **Gallery** (galerii).
+- Każda **Gallery** może zawierać wiele **Image** (zdjęć).
+- Każde **Image** należy do dokładnie jednej **Gallery**.
 
