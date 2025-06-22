@@ -5,9 +5,9 @@
 3. (Opcjonalne) MongoDB Compass
 ## 🟥 Ważne informacje!
 1. Aplikacja posiada wbudowane konto admin z hasłem admin
-2. Przed uruchomieniem servera, sprawdzić czy Baza danych jest uruchomiona (np. Get-Service -Name MongoDB w Windows)
+2. Przed uruchomieniem servera, sprawdzić czy Baza danych jest uruchomiona (np. Get-Service-Name MongoDB w Windows)
 3. Domyślnie server działa na http://localhost:3000/
-4. Panel użytkownika znajduję się pod adresem http://localhost:3000/dashboard, żeby się tam dostać trzeba być zalogowanym.
+4. Panel użytkownika znajduję się pod adresem http://localhost:3000/dashboard, żeby się tam dostać trzeba być zalogowanym
 ## ⚙️ Instrukcja uruchomienia
 1. Uruchomić server.js znajdujący się w katalogu bin za pomocą polecenia node
 ## ⚙️ Instrukcja importu (MongoDB Compass)
@@ -41,9 +41,9 @@ W projekcie zdefiniowano trzy główne modele Mongoose, które odpowiadają kole
 | **Gallery** | `galleries` | `name` (string), `description` (string), `date` (data), `user` (referencja do User) | Reprezentuje galerię zdjęć przypisaną do konkretnego użytkownika.                    |
 | **Image** | `images`  | `name` (string), `description` (string), `path` (string), `gallery` (referencja do Gallery) | Reprezentuje pojedynczy obrazek należący do konkretnej galerii.                      |
 ### ⏭ ⏮ Relacje między modelami
-- Jeden **User** może mieć wiele **Gallery** (galerii).
-- Każda **Gallery** może zawierać wiele **Image** (zdjęć).
-- Każde **Image** należy do dokładnie jednej **Gallery**.
+- Jeden **User** może mieć wiele **Gallery** (galerii)
+- Każda **Gallery** może zawierać wiele **Image** (zdjęć)
+- Każde **Image** należy do dokładnie jednej **Gallery**
 ## 🔗 Endpointy panelu użytkownika
 | Metoda | Endpoint                 | Opis                                           | Uwagi                                     |
 |--------|--------------------------|------------------------------------------------|-------------------------------------------|
