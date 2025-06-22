@@ -10,4 +10,4 @@
 2. W MongoDB Compass stworzyć następujące połączenie: mongodb://localhost:27017/GalleryDB
 3. Usunąć rekord z adminem w kolekcji users, ponieważ przykład zawiera admina.
 4. Wejść w GalleryDB i dla każdej znajdującej się tam kolekcji -> nacisnąć przycisk ADD DATA -> import JSON
-
+5. Przerzucić zdjęcia z example_import/images do public/images.
