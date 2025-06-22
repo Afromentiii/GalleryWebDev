@@ -13,3 +13,19 @@
 3. Usunąć rekord z adminem w kolekcji users, ponieważ przykład zawiera admina.
 4. Wejść w GalleryDB i dla każdej znajdującej się tam kolekcji -> nacisnąć przycisk ADD DATA -> import JSON
 5. Przerzucić zdjęcia z example_import/images do public/images.
+📦 Zależności projektu
+Pakiet	Wersja	Opis
+bcrypt	^6.0.0	Haszowanie haseł, bezpieczne logowanie.
+bootstrap	^5.3.7	Frontendowy framework CSS/JS.
+cookie-parser	~1.4.4	Middleware do parsowania ciasteczek.
+debug	~2.6.9	Narzędzie do logowania debug.
+express	^4.21.2	Framework aplikacji webowej dla Node.js.
+express-async-handler	^1.2.0	Obsługa błędów w funkcjach asynchronicznych.
+express-validator	^7.2.1	Walidacja i sanitizacja danych wejściowych.
+http-errors	~1.6.3	Tworzenie błędów HTTP, np. 404 lub 500.
+jsonwebtoken	^9.0.2	Obsługa tokenów JWT do autoryzacji i uwierzytelniania.
+mongoose	^8.16.0	ODM (Object Data Modeling) dla MongoDB.
+morgan	~1.9.1	Middleware do logowania zapytań HTTP.
+multer	^2.0.1	Obsługa przesyłania plików (np. zdjęć).
+pug	^2.0.4	Silnik szablonów HTML używany w Express.
+validator	^13.15.15	Biblioteka do walidacji i sanitizacji ciągów tekstowych.
