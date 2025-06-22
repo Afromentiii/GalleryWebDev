@@ -6,6 +6,7 @@
 ## 🟥 Ważne informacje!
 1. Aplikacja posiada wbudowane konto admin z hasłem admin.
 2. Przed uruchomieniem servera, sprawdzić czy Baza danych jest uruchomiona (np. Get-Service -Name MongoDB w Windows)
+3. Domyślnie server działa na http://localhost:3000/.
 ## ⚙️ Instrukcja uruchomienia
 1. Uruchomić server.js znajdujący się w katalogu bin za pomocą polecenia node
 ## ⚙️ Instrukcja importu (MongoDB Compass)
