@@ -6,8 +6,9 @@
 ## 🟥 Ważne informacje!
 1. Aplikacja posiada wbudowane konto admin z hasłem admin
 2. Przed uruchomieniem servera, sprawdzić czy Baza danych jest uruchomiona (np. Get-Service MongoDB w Windows PowerShell)
-4. Domyślnie server działa na http://localhost:3000/
-5. Panel użytkownika znajduję się pod adresem http://localhost:3000/dashboard, żeby się tam dostać trzeba być zalogowanym
+3. Domyślnie server działa na http://localhost:3000/
+4. Panel użytkownika znajduję się pod adresem http://localhost:3000/dashboard, żeby się tam dostać trzeba być zalogowanym
+5. Naciśnięcie lewego przycisku myszy na zdjęcia powiększony widok tego zdjęcia
 ## ⚙️ Instrukcja uruchomienia
 1. Uruchomić server.js znajdujący się w katalogu bin za pomocą polecenia node
 ## ⚙️ Instrukcja importu (MongoDB Compass)
