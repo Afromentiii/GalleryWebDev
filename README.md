@@ -1,7 +1,7 @@
 # Dokumentacja projektu
 ## Wymagania
 1. Node.js
-2. MongoDB Server.
+2. MongoDB Server (np. MongoDB Community Server)
 3. (Opcjonalne) MongoDB Compass
 ## 🟥 Ważne informacje!
 1. Aplikacja posiada wbudowane konto admin z hasłem admin.
