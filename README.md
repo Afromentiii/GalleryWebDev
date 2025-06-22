@@ -6,7 +6,7 @@
 ## 🟥 Ważne informacje!
 1. Aplikacja posiada wbudowane konto admin z hasłem admin.
 ## ⚙️ Instrukcja uruchomienia
-1. Uruchomić server.js znajdujący się w katalogu www za pomocą polecenia node
+1. Uruchomić server.js znajdujący się w katalogu bin za pomocą polecenia node
 ## ⚙️ Instrukcja importu (MongoDB Compass)
 1. Pobrać przykładowe dane np. z folderu example_import z repozytorium
 2. W MongoDB Compass stworzyć następujące połączenie: mongodb://localhost:27017/GalleryDB
