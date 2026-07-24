@@ -1,0 +1,14 @@
+    body 
+    {
+    background: linear-gradient(135deg,rgb(255, 255, 255),rgb(150, 139, 139));
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.card.h-100:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.12);
+}

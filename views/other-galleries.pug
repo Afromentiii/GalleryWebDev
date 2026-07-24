@@ -1,0 +1,34 @@
+.card.shadow-sm.mb-4
+  .card-body
+    h2.card-title.mb-4 
+      i.bi.bi-people-fill.me-2
+      | Galerie innych użytkowników
+
+    if otherGalleries && otherGalleries.length > 0
+      each gallery in otherGalleries
+        .card.mb-4.gallery-card.border-dashed
+          .card-body
+            h3.card-title
+              i.bi.bi-folder2.me-2
+              | #{gallery.name}
+            small.text-muted.mb-3.d-block 
+              i.bi.bi-person.me-1
+              | Autor: #{gallery.name}
+
+            if gallery.images && gallery.images.length > 0
+              .row.row-cols-2.row-cols-sm-3.row-cols-md-4.row-cols-lg-5.g-2.mt-3
+                each img in gallery.images
+                  .col
+                    .card.h-100
+                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name)
+                      .card-body.p-2
+                        h6.card-title.text-truncate #{img.name}
+                        p.card-text.small.text-muted #{img.description || 'Brak opisu'}
+            else
+              .alert.alert-info.mt-3
+                i.bi.bi-info-circle.me-2
+                | Ta galeria nie zawiera jeszcze żadnych obrazów.
+    else
+      .alert.alert-warning
+        i.bi.bi-exclamation-triangle.me-2
+        | Brak galerii innych użytkowników.
