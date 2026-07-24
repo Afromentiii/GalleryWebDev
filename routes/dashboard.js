@@ -6,10 +6,8 @@ const path = require('path');
 const Gallery = require('../models/gallery');
 const Image = require('../models/image');
 
-// W pliku multer config - załóżmy, że multer config jest w routes/someRoute.js
 const storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    // przejdź do folderu głównego projektu, a stamtąd do public/images
     cb(null, path.resolve(__dirname, '../public/images'));
   },
   filename: function(req, file, cb) {

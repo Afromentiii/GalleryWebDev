@@ -10,3 +10,18 @@ html
 
 block head
   link(rel='stylesheet', href='/stylesheets/dashboard.css')
+
+script.
+  function showImageModal(src, description) {
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    const modalImage = document.getElementById('modalImage');
+    const modalDesc = document.getElementById('modalDescription');
+    const modalTitle = document.getElementById('imageModalLabel');
+
+    modalImage.src = src;
+    modalImage.alt = description;
+    modalDesc.textContent = description;
+    modalTitle.textContent = 'Podgląd zdjęcia';
+
+    modal.show();
+  }

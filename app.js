@@ -14,6 +14,7 @@ var statsRouter = require('./routes/stats');
 var loginRouter =  require('./routes/login');
 var registerRouter = require('./routes/register');
 var dashboardRouter = require('./routes/dashboard');
+var adminRouter = require('./routes/admin_panel');
 
 var app = express();
 
@@ -39,6 +40,7 @@ app.use('/stats', statsRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter)
 app.use('/dashboard', dashboardRouter)
+app.use('/admin', adminRouter)
 
 app.use(express.static('public'));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
