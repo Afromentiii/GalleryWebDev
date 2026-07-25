@@ -1,58 +1,65 @@
-# Dokumentacja projektu
-## Wymagania
-1. Node.js
-2. MongoDB Server (np. MongoDB Community Server)
-3. (Opcjonalne) MongoDB Compass
-## 🟥 Ważne informacje!
-1. Aplikacja posiada wbudowane konto admin z hasłem admin
-2. Przed uruchomieniem servera, sprawdzić czy Baza danych jest uruchomiona (np. Get-Service MongoDB w Windows PowerShell)
-3. Domyślnie server działa na http://localhost:3000/
-4. Panel użytkownika znajduję się pod adresem http://localhost:3000/dashboard, żeby się tam dostać trzeba być zalogowanym
-5. Naciśnięcie lewego przycisku myszy na zdjęcia generuje powiększony widok
-## ⚙️ Instrukcja uruchomienia
-1. Uruchomić server.js znajdujący się w katalogu bin za pomocą polecenia node
-## ⚙️ Instrukcja importu (MongoDB Compass)
-1. Pobrać przykładowe dane np. z folderu example_import z repozytorium
-2. W MongoDB Compass stworzyć następujące połączenie: mongodb://localhost:27017/GalleryDB
-3. Usunąć rekord z adminem w kolekcji users, ponieważ przykład zawiera admina.
-4. Wejść w GalleryDB i dla każdej znajdującej się tam kolekcji -> nacisnąć przycisk ADD DATA -> import JSON
-5. Przerzucić zdjęcia z example_import/images do public/images.
-## 📦 Informacje o użytych pakietach
-| Pakiet | Wersja | Opis |
-|--------|--------|------|
-| [bcrypt](https://www.npmjs.com/package/bcrypt) | 6.0.0 | Haszowanie haseł, bezpieczne logowanie. |
-| [bootstrap](https://www.npmjs.com/package/bootstrap) | 5.3.7 | Framework CSS/JS do stylizacji frontendowej. |
-| [cookie-parser](https://www.npmjs.com/package/cookie-parser) | 1.4.4 | Middleware do parsowania ciasteczek. |
-| [debug](https://www.npmjs.com/package/debug) | 2.6.9 | Narzędzie do logowania informacji debug. |
-| [express](https://www.npmjs.com/package/express) | 4.21.2 | Główny framework webowy dla Node.js. |
-| [express-async-handler](https://www.npmjs.com/package/express-async-handler) | 1.2.0 | Obsługa błędów w funkcjach async w Express. |
-| [express-validator](https://www.npmjs.com/package/express-validator) | 7.2.1 | Walidacja i sanitizacja danych wejściowych. |
-| [http-errors](https://www.npmjs.com/package/http-errors) | 1.6.3 | Generowanie błędów HTTP (np. 404, 500). |
-| [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) | 9.0.2 | Obsługa JWT (autoryzacja, uwierzytelnianie). |
-| [mongoose](https://www.npmjs.com/package/mongoose) | 8.16.0 | ODM do pracy z bazą danych MongoDB. |
-| [morgan](https://www.npmjs.com/package/morgan) | 1.9.1 | Middleware do logowania zapytań HTTP. |
-| [multer](https://www.npmjs.com/package/multer) | 2.0.1 | Obsługa przesyłania plików (upload, np. zdjęć). |
-| [pug](https://www.npmjs.com/package/pug) | 2.0.4 | Silnik szablonów HTML używany przez Express. |
-| [validator](https://www.npmjs.com/package/validator) | 13.15.15 | Walidacja i sanitizacja danych tekstowych. |
-## 📚 Modele danych
-W projekcie zdefiniowano trzy główne modele Mongoose, które odpowiadają kolekcjom w bazie MongoDB:
-| Model   | Kolekcja   | Pola główne                                               | Opis                                                                                 |
-|---------|------------|-----------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **User** | `users`   | `username` (string, unikalny), `password` (string), `role` (enum: `user` lub `admin`) | Reprezentuje użytkownika aplikacji. Zawiera dane do logowania oraz rolę.             |
-| **Gallery** | `galleries` | `name` (string), `description` (string), `date` (data), `user` (referencja do User) | Reprezentuje galerię zdjęć przypisaną do konkretnego użytkownika.                    |
-| **Image** | `images`  | `name` (string), `description` (string), `path` (string), `gallery` (referencja do Gallery) | Reprezentuje pojedynczy obrazek należący do konkretnej galerii.                      |
-### ⏭ ⏮ Relacje między modelami
-- Jeden **User** może mieć wiele **Gallery** (galerii)
-- Każda **Gallery** może zawierać wiele **Image** (zdjęć)
-- Każde **Image** należy do dokładnie jednej **Gallery**
-## 🔗 Endpointy panelu użytkownika
-| Metoda | Endpoint                 | Opis                                           | Uwagi                                     |
-|--------|--------------------------|------------------------------------------------|-------------------------------------------|
-| GET    | `/`                      | Pobranie listy galerii użytkownika i innych użytkowników wraz z obrazkami | Wymaga uwierzytelnienia (authenticateJWT) |
-| POST   | `/gallery/add`            | Dodanie nowej galerii                           | Wymaga uwierzytelnienia                    |
-| POST   | `/gallery/:id/add-image`  | Dodanie obrazka do galerii o podanym `id`      | Wymaga uwierzytelnienia, używa multer do uploadu |
-| POST   | `/gallery/delete/:id`     | Usunięcie galerii o podanym `id` oraz powiązanych obrazków | Wymaga uwierzytelnienia                    |
-| POST   | `/image/delete/:id`       | Usunięcie pojedynczego obrazka o podanym `id`  | Wymaga uwierzytelnienia, sprawdza właściciela |
-| POST   | `/image/edit/:id`         | Edycja nazwy i opisu obrazka o podanym `id`    | Wymaga uwierzytelnienia, sprawdza właściciela |
-| POST   | `/logout`                 | Wylogowanie użytkownika (usunięcie tokenu z cookie) | Nie wymaga uwierzytelnienia                |
+<div align="justify">
 
+## Opis projektu
+Projekt stanowi aplikację webową umożliwiającą tworzenie i zarządzanie galeriami zdjęć. Aplikacja została zaprojektowana w celu dostarczenia intuicyjnego interfejsu do publikacji, organizacji oraz współdzielenia obrazów między użytkownikami. Zastosowano tu system autoryzacji oparty o tokeny JWT, a wbudowany podział ról zapewnia odmienne ścieżki dostępu, oddzielając przywileje zwykłych użytkowników od uprawnień administratora. Całość interfejsu została poddana refaktoryzacji wizualnej, opierając się na nowoczesnych, animowanych elementach nawigacyjnych i zaokrąglonych krawędziach.
+
+![Podgląd Aplikacji](readme/images/przyklad.png)
+
+## ⚙️ Wdrożenie i uruchomienie aplikacji
+Minimalne wymogi uruchomieniowe zakładają instalację środowiska uruchomieniowego Node.js oraz systemowego demona bazy MongoDB.
+
+### Procedura startowa
+1. Przed przystąpieniem do jakichkolwiek działań należy zainstalować wymagane zależności projektowe, wykonując komendę `npm install` w głównym katalogu aplikacji.
+2. Konieczna jest weryfikacja poprawności działania demona bazy danych przed inicjalizacją środowiska backendowego (np. polecenie `Get-Service MongoDB` pod systemem operacyjnym Windows).
+3. Inicjalizacja skryptu startowego realizowana jest za pomocą polecenia `npm start` z poziomu głównego katalogu.
+4. Interfejs dostępowy zlokalizowany jest pod statycznym adresem `http://localhost:3000`.
+5. System zabezpieczono wbudowanym w instancję kontem administracyjnym o prekonfigurowanych, domyślnych danych autoryzacyjnych.
+
+### Inicjalizacja danymi demonstracyjnymi
+Dla weryfikacji funkcjonalności zaimplementowano możliwość zasilenia systemu przykładowymi zbiorami (mock-data):
+1. Proces importu realizowany jest w obrębie narzędzia analitycznego (np. MongoDB Compass), nakierowanego na przestrzeń `mongodb://localhost:27017/GalleryDB`.
+2. Zbiory danych (kolekcje JSON) wczytywane są z repozytorium zewnętrznego (katalog `example_import`).
+3. Warunkiem integralności systemu jest fizyczny transfer binarnych plików graficznych (`example_import/images`) do publicznego rejestru statycznego (`public/images`).
+4. **Opcjonalnie (Alternatywa automatyczna):** Zamiast ręcznego importu struktur JSON za pomocą narzędzia Compass, proces zasilenia bazy można całkowicie zautomatyzować uruchamiając z poziomu terminala polecenie `node import_data.js` w głównym katalogu projektu. Skrypt ten samoistnie oczyści istniejące kolekcje i zadeklaruje dane demonstracyjne.
+
+## ⚙️ Konstrukcja aplikacji
+Architektura została oparta o standard wzorca projektowego Model-View-Controller (MVC) z użyciem technologii środowiska Node.js.
+- **Logika biznesowa i routing:** Zrealizowane poprzez framework Express.js. Gwarantuje to obsługę zapytań asynchronicznych oraz ustandaryzowaną separację ścieżek dostępu (np. strefa autoryzowana w domenie `/dashboard`).
+- **Warstwa danych:** Implementacja bazy nierelacyjnej MongoDB przy asyście biblioteki Mongoose. Logika przewiduje referencyjne powiązania pomiędzy dokumentami (User ↔ Gallery ↔ Image).
+- **Warstwa prezentacji:** Generowana po stronie serwera przy pomocy silnika szablonów Pug. Stylizacja opiera się na szkielecie Bootstrap CSS, poszerzonym o reguły własne implementujące specyficzny design układu i responsywny panel boczny.
+- **Bezpieczeństwo i Sesja:** Zarządzanie tożsamością zrealizowano bezstanowo przy użyciu algorytmów uwierzytelniających (JWT). Hasła przed utrwaleniem w bazie podlegają jednoznacznej operacji haszowania za pomocą algorytmu bcrypt.
+
+## 📦 Wykorzystane pakiety Node.js
+W architekturze projektu zintegrowano następujące pakiety wspierające, zarządzane przez system NPM:
+
+| Pakiet | Wersja | Zastosowanie architektoniczne |
+|--------|--------|-------------------------------|
+| **bcrypt** | 6.0.0 | Zabezpieczanie poświadczeń poprzez asymetryczne haszowanie haseł. |
+| **bootstrap** | 5.3.7 | Standaryzacja oraz responsywne stylowanie warstwy widoku front-endu. |
+| **express** | 4.21.2 | Główny szkielet serwerowy do ewaluacji ścieżek dostępu (routingu) oraz asynchronicznej obsługi zapytań HTTP. |
+| **jsonwebtoken** | 9.0.2 | Kryptograficzne podpisywanie i weryfikacja bezstanowych tokenów sesyjnych. |
+| **mongoose** | 8.16.0 | Tworzenie struktury warstwy dostępu do danych (ODM) nakładającej sztywne modele i reguły walidacyjne na pliki MongoDB. |
+| **multer** | 2.0.1 | Buforowanie oraz fizyczny zapis w pamięci masowej przesyłanych od klienta obrazów (strumieni `multipart/form-data`). |
+| **pug** | 2.0.4 | Ekstrakcja danych obiektowych z serwera i konwersja ich do postaci strukturalnego, dynamicznego kodu HTML. |
+
+## ⚠️ Ograniczenia
+W strukturze systemu można zidentyfikować określone ograniczenia techniczne:
+- **Zasoby dyskowe:** Obrazy przechowywane są w natywnym katalogu aplikacji (`public/images/`). Brak integracji z zewnętrznymi chmurami obliczeniowymi (np. AWS S3) potencjalnie utrudnia skalowalność horyzontalną rozwiązania przy rozroście systemu.
+- **Optymalizacja zasobów:** Aplikacja obsługuje wczytywanie zdjęć synchronicznie bez wsparcia dla mechanizmu leniwego ładowania (lazy loading) lub paginacji, co w przypadku znaczącej liczby wpisów w galerii może determinować spadek wydajności renderowania widoków.
+- **Obróbka graficzna:** Przesłane pliki są zapisywane w oryginalnej rozdzielczości i rozmiarze, bez zaimplementowanego mechanizmu bezstratnej kompresji przed zapisem przy użyciu dodatkowych modułów (np. Sharp).
+
+## 📚 Modele danych
+Zdefiniowano trzy zasadnicze modele obiektowo-dokumentowe odpowiadające kolekcjom bazy MongoDB:
+
+| Model | Kolekcja | Pola strukturalne | Rola |
+|-------|----------|-------------------|------|
+| **User** | `users` | `username` (unikalny), `password` (hash), `role` | Encja reprezentująca użytkownika. Posiada rolę (`user` / `admin`), determinującą uprawnienia. |
+| **Gallery** | `galleries` | `name`, `description`, `date`, `user` | Skupia zasoby wizualne oraz posiada relację zwrotną do właściciela (User). |
+| **Image** | `images` | `name`, `description`, `path`, `gallery` | Zapis metadanych pojedynczego obrazu oraz jego bezwzględnej ścieżki w systemie plików. |
+
+## 🔗 Prawa Dostępu
+Proces modyfikacji danych został odizolowany przy użyciu ról:
+- **Użytkownicy standardowi:** Uprawnieni do zakładania i usuwania własnych galerii, jak również wstawiania, modyfikacji oraz trwałego kasowania własnych obrazów. Mogą przeglądać otwarte galerie innych użytkowników.
+- **Administratorzy:** Zyskują nieograniczony dostęp operacyjny (edycja lub usuwanie plików i galerii), egzekwowany zarówno poprzez wyizolowany panel administracyjny (`/admin`), jak i bezpośrednio wewnątrz standardowych widoków aplikacji, niezależnie od właściciela zasobu.
+
+</div>
