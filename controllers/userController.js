@@ -1,16 +1,48 @@
-const user = require("../models/user");
+const User = require('../models/user');
+const Gallery = require('../models/gallery');
+const Image = require('../models/image');
 
-const mongoose = require("mongoose");
+exports.addUser = async (req, res) => {
+  try {
+    const { username, password, role } = req.body;
+    if (!username || !password || !role) return res.status(400).send("Wypełnij wszystkie pola");
 
-// asynchronicznie
-const asyncHandler = require("express-async-handler");
+    const existingUser = await User.findOne({ username });
+    if (existingUser) return res.status(400).send("Użytkownik już istnieje");
 
-exports.userList = asyncHandler(async (req, res, next) => {
-  const allUsers = await user.find({}).exec();
-  res.render("user_list", { title: "GalleryDB users:", user_list: allUsers });
-});
+    const newUser = new User({ username, password, role });
+    await newUser.save();
 
-// można prościej np. z metodą then i funkcją callback w środku
-// exports.userList=((req, res, next) => {
-//   user.find({}).then((allUsers) => res.render("user_list", { title: "GalleryDB users:", user_list: allUsers }));
-// });
+    res.redirect('/admin');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Błąd serwera");
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+
+    const galleries = await Gallery.find({ user: userId });
+    for (const gallery of galleries) {
+      await Image.deleteMany({ gallery: gallery._id });
+    }
+    await Gallery.deleteMany({ user: userId });
+    await User.deleteOne({ _id: userId });
+
+    res.redirect('/admin');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Błąd serwera");
+  }
+};
+
+exports.userList = async (req, res, next) => {
+  try {
+    const allUsers = await User.find({}).exec();
+    res.render("user_list", { title: "GalleryDB users:", user_list: allUsers });
+  } catch(err) {
+    next(err);
+  }
+};

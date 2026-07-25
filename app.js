@@ -45,10 +45,6 @@ app.use('/admin', adminRouter)
 app.use(express.static('public'));
 app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-
 app.use(function(req, res, next) {
   next(createError(404));
 });

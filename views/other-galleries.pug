@@ -1,62 +1,42 @@
-.card.shadow-sm.mb-4
-  .card-body
-    h2.card-title.mb-4 
-      i.bi.bi-people-fill.me-2
-      | Galerie innych użytkowników
+extends layout
 
-    if otherGalleries && otherGalleries.length > 0
-      each gallery in otherGalleries
-        .card.mb-4.gallery-card.border-dashed
+block head
+  link(rel='stylesheet', href='/stylesheets/dashboard.css')
+
+block content
+  .container.mt-2
+    .row.justify-content-center
+      .col-lg-12
+        .card.shadow-sm.mb-4
           .card-body
-            h3.card-title
-              i.bi.bi-folder2.me-2
-              | #{gallery.name}
-            small.text-muted.mb-3.d-block 
-              i.bi.bi-person.me-1
+            .header-pill
+              i.bi.bi-people-fill
+              | Galerie innych użytkowników
 
-            if gallery.images && gallery.images.length > 0
-              .row.row-cols-2.row-cols-sm-3.row-cols-md-4.row-cols-lg-5.g-2.mt-3
-                each img in gallery.images
+            if otherGalleries && otherGalleries.length > 0
+              .row.row-cols-1.row-cols-sm-2.row-cols-md-3.row-cols-lg-4.g-4
+                each gallery in otherGalleries
                   .col
-                    .card.h-100
-                      img.card-img-top.image-thumbnail(src=img.path, alt=img.name, onclick=`showImageModal('${img.path}', '${(img.description || 'Brak opisu').replace(/'/g, "\\'")}')`)
-                      .card-body.p-2
-                        h6.card-title.text-truncate #{img.name}
+                    .card.h-100.gallery-card.border-dashed.shadow-sm.position-relative(style='cursor: pointer;', onclick=`window.location.href='/dashboard/gallery/${gallery._id}'`)
+                      if user && user.role === 'admin'
+                        form(action=`/dashboard/gallery/delete/${gallery._id}`, method='POST', style="position: absolute; top: 10px; right: 10px; z-index: 10;")
+                          button.btn.btn-sm.btn-danger(type='submit', onclick="event.stopPropagation(); return confirm('Na pewno chcesz usunąć tę galerię (jako Admin)?');")
+                            i.bi.bi-trash
 
-                        button.btn.btn-sm.btn-link.p-0.mb-2(type='button', onclick=`toggleDescription('${img._id}')`)
-                          i.bi.bi-eye.me-1
-                          | Pokaż/Ukryj opis
-
-                        .image-description(style='display: none;', id=`descBlock_${img._id}`)
-                          small.text-muted
-                            | Nazwa: #{img.name}
-                            br
-                            | Opis: #{img.description || 'Brak opisu'}
+                      if gallery.images && gallery.images.length > 0
+                        - var coverImage = gallery.images[Math.floor(Math.random() * gallery.images.length)]
+                        img.card-img-top.image-thumbnail(src=coverImage.path, alt=gallery.name, style="height: 200px; object-fit: cover;")
+                      else
+                        .d-flex.justify-content-center.align-items-center.bg-light(style="height: 200px;")
+                          i.bi.bi-image.text-muted(style="font-size: 3rem;")
+                      .card-body.d-flex.flex-column.justify-content-center.align-items-center
+                        h5.card-title.mb-1.text-truncate(style="max-width: 100%;") #{gallery.name}
+                        small.text-muted.mb-1 
+                          i.bi.bi-person.me-1
+                          | #{gallery.user ? gallery.user.username : 'Nieznany'}
+                        if gallery.images
+                          small.text-muted #{gallery.images.length} zdjęć
             else
-              .alert.alert-info.mt-3
-                i.bi.bi-info-circle.me-2
-                | Ta galeria nie zawiera jeszcze żadnych obrazów.
-    else
-      .alert.alert-warning
-        i.bi.bi-exclamation-triangle.me-2
-        | Brak galerii innych użytkowników.
-
-script.
-  function toggleDescription(id) {
-    const block = document.getElementById('descBlock_' + id);
-    if (block) {
-      block.style.display = block.style.display === 'none' ? 'block' : 'none';
-    }
-  }
-
-
-#imageModal.modal.fade(tabindex='-1', aria-labelledby='imageModalLabel', aria-hidden='true')
-  .modal-dialog.modal-dialog-centered.modal-xl
-    .modal-content
-      .modal-header
-        h5#imageModalLabel.modal-title
-        button.btn-close(type='button', data-bs-dismiss='modal', aria-label='Close')
-      .modal-body.text-center
-        img#modalImage.img-fluid.mb-3(src='', alt='')
-        hr
-        p#modalDescription.text-muted
+              .alert.alert-warning
+                i.bi.bi-exclamation-triangle.me-2
+                | Brak galerii innych użytkowników.
